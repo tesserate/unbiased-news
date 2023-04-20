@@ -30,6 +30,7 @@ function updateContent(fields) {
   scoreValue.textContent = `${fields.gpt3_importance}/5`;
 
   updateGradient(fields.gpt3_political_leaning);
+
 }
 
 const gradientLine = document.querySelector(".gradient-line");
@@ -89,6 +90,38 @@ function updateGradient(politicalLeaning) {
       }
     });
   });
+  
+  const whyButton = document.querySelector(".why-button");
+  const how2Button = document.querySelector(".how2-button");
+  const modalContainerImportance = document.querySelector(".modal-container-importance");
+  const modalImportance = document.querySelector(".modal-importance");
+  const modalHeaderImportance = document.querySelector(".modal-header-importance h2");
+  const modalBodyImportance = document.querySelector(".modal-body-importance");
+  const closeButtonImportance = document.querySelector(".close-button-importance");
+  
+  whyButton.addEventListener("click", () => {
+  modalHeaderImportance.textContent = "Why should I care?";
+  modalBodyImportance.textContent = data.records[currentIndex].fields.gpt3_why;
+  modalContainerImportance.style.display = "flex";
+});
+
+how2Button.addEventListener("click", () => {
+  modalHeaderImportance.textContent = "How This Affects Me?";
+  modalBodyImportance.textContent = data.records[currentIndex].fields.gpt3_how;
+  modalContainerImportance.style.display = "flex";
+});
+
+closeButtonImportance.addEventListener("click", () => {
+  modalContainerImportance.style.display = "none";
+});
+
+window.addEventListener("click", (event) => {
+  if (event.target === modalContainerImportance) {
+    modalContainerImportance.style.display = "none";
+  }
+});
+
+  
 
   const leftButton = document.querySelector(".left-button");
   const rightButton = document.querySelector(".right-button");
